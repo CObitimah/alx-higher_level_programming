@@ -1,0 +1,8 @@
+#include "lists.h"
+#include <stdlib.h>
+
+/**
+check_cycle - check if a singly linked list contains a cycle
+list: A singly-linked list
+Return: if there is no 
+int check_cycle(listint_t *list)
