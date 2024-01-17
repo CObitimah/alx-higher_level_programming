@@ -1,8 +1,10 @@
 #include "lists.h"
 #include <stdlib.h>
 
-/**
-check_cycle - check if a singly linked list contains a cycle
-list: A singly-linked list
-Return: if there is no 
+/*
+qcheck_cycle - function that checks if singly linked list contains a cycle
+@list: list of elements of the cycle
+Return: 0, if there is no cycle, if there is cycle 1
+*/
 int check_cycle(listint_t *list)
+
