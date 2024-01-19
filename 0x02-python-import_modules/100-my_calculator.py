@@ -11,7 +11,7 @@ if __name__ == "__main__":
     b = int(argv[3])
     if operator == '+':
         print(f"{a} {operator} {b} = {add(a, b)}")
-    elif operator == '_':
+    elif operator == '-':
         print(f"{a} {operator} {b} = {sub(a, b)}")
     elif operator == '*':
         print(f"{a} {operator} {b} = {mul(a, b)}")
