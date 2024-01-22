@@ -3,9 +3,6 @@ def element_at(my_list, idx):
     
     if idx < 0:
         return None
-    
-    for i, element in enumerate(my_list):
-        if i == idx:
-            return element
-
-        return None
+    if idx > len(my_list) - 1:
+        return (None)
+    return my_list[idx]
