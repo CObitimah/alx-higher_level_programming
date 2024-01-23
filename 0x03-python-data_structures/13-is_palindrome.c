@@ -54,7 +54,7 @@ int compare_lists(listint_t *head, listint_t *middle, int len)
 		if (head->n != middle->n)
 			return (0);
 		head = head->next;
-		middle = head->next;
+		middle = middle->next;
 	}
 	return (1);
 }
@@ -73,7 +73,7 @@ void reverse(listint_t **head)
 		return;
 
 	prev = NULL;
-	current = NULL;
+	current = *head;
 	while (current != NULL)
 	{
 		next = current->next;
