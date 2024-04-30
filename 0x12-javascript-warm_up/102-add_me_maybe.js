@@ -1,8 +1,7 @@
 #!/usr/bin/node
-// Executes a function x times.
+// executes x times a function.
 
 exports.addMeMaybe = function (number, theFunction) {
-  let incrementedNumber = number + 1;
-  theFunction(incrementedNumber);
+  number++;
+  theFunction(number);
 };
-
