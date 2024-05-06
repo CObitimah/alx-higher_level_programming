@@ -1,34 +1,36 @@
 #!/usr/bin/python3
-"""Print the State object with the name passed as an argument from the database hbtn_0e_6_usa"""
+
+""" script that lists all State objects that contain the letter a."""
 
 import sys
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessiomaker
 from model_state import Base, State
 
-if __name__ == "__main__":
-    # Check if correct number of arguments is provided
+
+def find_state(u_name, p_word, db_name, s_name):
+    """Found method that prints the State object."""
+    s_query = f"mysql://{u_name}:{p_word}@localhost:3306/{db_name}"
+
+    engine = create_engine(s_query, pool_pre_ping=True)
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    state = session.query(State).filter(State.name == s_name).first()
+
+    if not state:
+        print('Not found')
+    else:
+        print(state.id)
+
+    session.close()
+
+
+if __name__ == '__main__':
     if len(sys.argv) != 5:
-        print("Usage: {} <username> <password> <database name> <state name<".format(sys.argv[0]))
+        print('Error')
         sys.exit(1)
 
-        # Connect to the MySQL server
-        engine = create_engine("mysql+mysqldb://{}:{}@localhost:3306/{}"
-                               .format(sys.argv[1], sys.argv[2], sys.argv[3]))
-
-        # Create a session to interact with the database
-        Session = sessionmaker(bind=engine)
-        session = Session()
-
-        # Query the State object with the given name
-        state_name = sys.argv[4]
-        state = session.query(State).filter(State.name == state_name).first()
-
-        # Print the state ID if found, otherwise print "Not found"
-        if state:
-            print(state.id)
-        else:
-            print("Not found")
-
-        # Close the session
-        session.close()
+u_name, p_word, db_name, s_name = sys.argv[1:]
+find_state(u_name, p_word, db_name, s_name)
