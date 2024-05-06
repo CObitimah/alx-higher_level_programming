@@ -1,26 +1,34 @@
 #!/usr/bin/python3
-"""
-Script that lists all State objects that contain the letter a from the database
-Using module SQLAlchemy
-"""
 
-from model_state import Base, State
-from sqlalchemy import create_engine
+""" script that lists all State objects that contain the letter a."""
+
+import sys
 from sqlalchemy.orm import sessionmaker
-from sys import argv
+from sqlalchemy import create_engine
+from model_state import Base, State
 
-if __name__ == "__main__":
-    # create an engine
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        argv[1], argv[2], argv[3]), pool_pre_ping=True)
-    # create a configured "Session" class
+
+def list_of_a(u_name, p_word, db_name):
+    a_query = f"mysql://{u_name}:{p_word}@localhost:3306/{db_name}"
+
+    engine = create_engine(a_query, pool_pre_ping=True)
+
     Session = sessionmaker(bind=engine)
-    # create a Session
     session = Session()
-    Base.metadata.create_all(engine)
 
-    s_tate = session.query(State).filter(State.name.like('%a%'))\
-                                 .order_by(State.id).all()
-    for state in s_tate:
-        print("{}: {}".format(state.id, state.name))
-    session.close()
+    states = session.query(State)\
+        .filter(State.name.like('%a%'))\
+        .order_by(State.id)\
+        .all()
+
+    for state in states:
+        print(f'{state.id}: {state.name}')
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 4:
+        print('Error')
+        sys.exit(1)
+
+    u_name, p_word, db_name = sys.argv[1:]
+    list_of_a(u_name, p_word, db_name)
