@@ -1,27 +1,36 @@
 #!/usr/bin/python3
-"""
-Script that adds the State object “Louisiana” to the database
-Using module SQLAlchemy
-"""
 
-from model_state import Base, State
-from sqlalchemy import create_engine
+""" script that lists all State objects that contain the letter a."""
+
+import sys
 from sqlalchemy.orm import sessionmaker
-from sys import argv
+from sqlalchemy import create_engine
+from model_state import Base, State
 
-if __name__ == "__main__":
-    # create an engine
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        argv[1], argv[2], argv[3]), pool_pre_ping=True)
-    # create a configured "Session" class
+
+def add_state(u_name, p_word, db_name):
+    a_query = f"mysql://{u_name}:{p_word}@localhost:3306/{db_name}"
+
+    engine = create_engine(a_query, pool_pre_ping=True)
+
     Session = sessionmaker(bind=engine)
-    # create a Session
     session = Session()
-    Base.metadata.create_all(engine)
 
-    add_state = State(name="Louisiana")
-    session.add(add_state)
-    # commit and close session
+    new_state = State(name='Louisiana')
+    session.add(new_state)
+
     session.commit()
-    print(add_state.id)
+    name = 'Louisiana'
+    new_state_id = session.query(State).filter(State.name == name).first()
+
+    print(f'{new_state_id.id}')
     session.close()
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 4:
+        print('Error')
+        sys.exit(1)
+
+    u_name, p_word, db_name = sys.argv[1:]
+    add_state(u_name, p_word, db_name)
