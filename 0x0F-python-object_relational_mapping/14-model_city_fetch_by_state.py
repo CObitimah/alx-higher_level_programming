@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 """
-Script that deletes all State objects with a name containing
-the letter a from the database
-Using module SQLAlchemy
+Script that prints all City objects from the database
 """
-
+from model_city import City
 from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -19,9 +17,9 @@ if __name__ == "__main__":
     # create a Session
     session = Session()
     Base.metadata.create_all(engine)
-    state_del = session.query(State).filter(State.name.like('%a%')).all()
-    for delete in state_del:
-        session.delete(delete)
-    # commit and close session
-    session.commit()
+
+    city = session.query(State, City).join(City).order_by(City.id)
+    for state, city in city:
+        print("{}: ({}) {}".format(state.name, city.id, city.name))
+    # Close session
     session.close()
