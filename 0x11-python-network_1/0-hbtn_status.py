@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # A script that fetches url
 import urllib.request
-url = 'https://alxintranet.hbtn.io/status'
+url = 'https://alx-intranet.hbtn.io/status'
 with urllib.request.urlopen(url) as req:
     html_content = req.read()
     utf_data = html_content.decode('utf-8')
