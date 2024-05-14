@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" module document """
+"""
+Script to send a request to a URL and display the value of the variable
+"""
 import requests
 if __name__ == '__main__':
     url = 'https://alx-intranet.hbtn.io/status'
