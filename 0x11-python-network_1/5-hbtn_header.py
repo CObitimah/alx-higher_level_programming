@@ -1,11 +1,9 @@
 #!/usr/bin/python3
-"""
-Script to send a request to a URL and display the value of the variable
-"""
+""" module doc """
 import requests
+import sys
 if __name__ == '__main__':
-    url = 'https://alx-intranet.hbtn.io/status'
+    url = sys.argv[1]
     r = requests.get(url)
-    data = r.text
-    data_type = type(data)
-    print(f'Body response:\n\t- type: {data_type}\n\t- content: {data}')
+    x_request_id = r.headers.get('X-Request-Id')
+    print(x_request_id)
