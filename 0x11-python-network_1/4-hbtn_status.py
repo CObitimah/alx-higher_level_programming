@@ -10,11 +10,7 @@ Requirements:
 """
 
 import requests
-def main():
-    """
-    Fetches the URL https://alx-intranet.hbtn.io/status and displays information about the response body.
-    """
-    url = 'https://alx-intranet.hbtn.io/status'
+url = 'https://alx-intranet.hbtn.io/status'
     response = request.get(url)
     print("Body response:")
     print("\t- type:", type(response.text))
