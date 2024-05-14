@@ -4,10 +4,9 @@ Script to send a request to a URL and display the value of the variable X-Reques
 """
 
 import requests
-import sys
-
 if __name__ == '__main__':
-    url = sys.argv[1]
+    url = 'https://alx-intranet.hbtn.io/status'
     response = requests.get(url)
-    request_id = response.headers.get('X-Request-Id')
-    print(request_id)
+    data = response.text
+    data_type = type(data)
+    print(f'Body response:\n\t- type: {data_type}\n\t- content: {data}')
