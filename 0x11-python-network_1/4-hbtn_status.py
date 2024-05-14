@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Script to fetch and display information from https://alx-intranet.hbtn.io/status using the requests package.
-"""
+""" module document """
 import requests
 if __name__ == '__main__':
     url = 'https://alx-intranet.hbtn.io/status'
