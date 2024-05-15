@@ -5,10 +5,14 @@ Script to a POST request to a given URL with an email parameter and display the 
 import requests
 import sys
 
-# def main():
+def main():
     """
     Main function to send a POST request with the provided email address.
     """
+    if len(sys.argv) != 3:
+        print("Usage: python script.py <URL> <email>")
+        sys.exit(1)
+
     url = sys.argv[1]
     email = sys.argv[2]
 
