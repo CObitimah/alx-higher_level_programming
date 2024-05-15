@@ -19,7 +19,7 @@ def main():
         else:
             print(response.text)
     except requests.RequestException as e:
-        print(f'Error: {e}')
+        print(f"Error: {e}")
 
-        if __name__ == '__main__':
-            main()
+ if __name__ == '__main__':
+     main()
