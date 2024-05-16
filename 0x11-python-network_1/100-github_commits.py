@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """
-This script takes a repository name and owner name as arguments and uses the GitHub API to list 10 commits (from the most recent to oldest) of the repository by the specified owner.
+This script takes a repository name and owner name as arguments.
 """
 
 import sys
 import requests
+
 
 def get_commits(repo, owner):
     url = f'https://api.github.com/repos/{owner}/{repo}/commits'
@@ -17,6 +18,7 @@ def get_commits(repo, owner):
             print(f"{sha}: {author_name}")
     else:
         print("Error fetching commits")
+
 
 if __name__ == "__main__":
     repo_name = sys.argv[1]
