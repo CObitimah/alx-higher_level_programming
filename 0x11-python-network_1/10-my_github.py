@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """
-This script takes GitHub credentials (username and personal access token) and uses the GitHub API to display the user's id.
+This script takes GitHub credentials (username and personal access token).
 """
 
 import sys
 import requests
+
 
 def get_github_id(username, password):
     url = 'https://api.github.com/user'
@@ -13,6 +14,7 @@ def get_github_id(username, password):
         return response.json()['id']
     else:
         return None
+
 
 if __name__ == "__main__":
     username = sys.argv[1]
