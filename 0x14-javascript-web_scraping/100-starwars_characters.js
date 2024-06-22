@@ -21,8 +21,8 @@ request(apiUrl, (error, response, body) => {
     return;
   }
 
-  const film = JSON.parse(body);
-  const characters = film.characters;
+  const filmData = JSON.parse(body);
+  const charactersUrls = filmData.characters;
 
   // Function to fetch character name from URL
   const fetchCharacterName = (url) => {
@@ -31,15 +31,15 @@ request(apiUrl, (error, response, body) => {
         if (error) {
           reject(error);
         } else {
-          const character = JSON.parse(body);
-          resolve(character.name);
+          const characterData = JSON.parse(body);
+          resolve(characterData.name);
         }
       });
     });
   };
 
   // Array to store promises of character names
-  const promises = characters.map(characterUrl => fetchCharacterName(characterUrl));
+  const promises = charactersUrls.map(characterUrl => fetchCharacterName(characterUrl));
 
   // Resolve all promises and print character names
   Promise.all(promises)
@@ -50,3 +50,4 @@ request(apiUrl, (error, response, body) => {
       console.error('Error fetching character:', error);
     });
 });
+
