@@ -50,4 +50,3 @@ request(apiUrl, (error, response, body) => {
       console.error('Error fetching character:', error);
     });
 });
-
