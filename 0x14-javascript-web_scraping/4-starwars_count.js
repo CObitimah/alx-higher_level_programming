@@ -8,6 +8,8 @@ if (process.argv.length !== 3) {
 }
 
 const apiUrl = process.argv[2];
+const wedgeAntillesId = '18';
+let count = 0;
 
 request(apiUrl, (error, response, body) => {
   if (error) {
@@ -20,20 +22,13 @@ request(apiUrl, (error, response, body) => {
     return;
   }
 
-  try {
-    const data = JSON.parse(body);
-    const films = data.results;
-    const wedgeAntillesUrl = 'https://swapi-api.alx-tools.com/api/people/18/';
-    let count = 0;
+  const films = JSON.parse(body).results;
 
-    films.forEach(film => {
-      if (film.characters.includes(wedgeAntillesUrl)) {
-        count++;
-      }
-    });
+  films.forEach(film => {
+    if (film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${wedgeAntillesId}/`)) {
+      count++;
+    }
+  });
 
-    console.log(count);
-  } catch (e) {
-    console.error('Error parsing JSON:', e.message);
-  }
+  console.log(count);
 });
