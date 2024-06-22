@@ -11,24 +11,29 @@ const apiUrl = process.argv[2];
 
 request(apiUrl, (error, response, body) => {
   if (error) {
-    console.error('Error:', error);
+    console.error('Error fetching data:', error);
     return;
   }
 
   if (response.statusCode !== 200) {
-    console.error('Failed to fetch data');
+    console.error('Failed to fetch data. Status code:', response.statusCode);
     return;
   }
 
-  const films = JSON.parse(body).results;
-  const wedgeAntillesId = '18';
-  let count = 0;
+  try {
+    const data = JSON.parse(body);
+    const films = data.results;
+    const wedgeAntillesUrl = `https://swapi-api.alx-tools.com/api/people/18/`;
+    let count = 0;
 
-  films.forEach(film => {
-    if (film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${wedgeAntillesId}/`)) {
-      count++;
-    }
-  });
+    films.forEach(film => {
+      if (film.characters.includes(wedgeAntillesUrl)) {
+        count++;
+      }
+    });
 
-  console.log(count);
+    console.log(count);
+  } catch (e) {
+    console.error('Error parsing JSON:', e.message);
+  }
 });
