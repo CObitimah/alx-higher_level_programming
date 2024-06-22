@@ -23,7 +23,7 @@ request(apiUrl, (error, response, body) => {
   try {
     const data = JSON.parse(body);
     const films = data.results;
-    const wedgeAntillesUrl = `https://swapi-api.alx-tools.com/api/people/18/`;
+    const wedgeAntillesUrl = 'https://swapi-api.alx-tools.com/api/people/18/';
     let count = 0;
 
     films.forEach(film => {
