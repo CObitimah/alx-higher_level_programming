@@ -3,6 +3,7 @@
 const request = require('request');
 const apiUrl = process.argv[2];
 const characterId = 18;
+const characterUrl = `https://swapi-api.alx-tools.com/api/people/${characterId}/`;
 
 if (!apiUrl) {
   console.error('Error: Missing API URL. Usage: ./4-starwars_count.js <api-url>');
@@ -19,12 +20,7 @@ request.get(apiUrl, (err, response, body) => {
   } else {
     try {
       const films = JSON.parse(body).results;
-      const wedgeCount = films.reduce((count, film) => {
-        if (film.characters.includes(`https://swapi-api.alx-tools.com/api/people/${characterId}/`)) {
-          return count + 1;
-        }
-        return count;
-      }, 0);
+      const wedgeCount = films.filter(film => film.characters.includes(characterUrl)).length;
       console.log(wedgeCount);
     } catch (parseError) {
       console.error(`Error parsing JSON: ${parseError.message}`);
